@@ -1,0 +1,612 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f6f8;
+    padding: 20px;
+    padding-bottom: 90px; /* space for bottom nav */
+}
+
+/********************************
+ HEADER
+*********************************/
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/********************************
+ DASHBOARD CARDS
+*********************************/
+.dashboard {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.card:hover {
+    background: #007bff;
+    color: white;
+    transform: translateY(-3px);
+}
+
+/********************************
+ MODULE SECTIONS
+*********************************/
+.module {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Page visibility control */
+.hidden {
+    display: none;
+}
+
+.page.hidden {
+    display: none;
+}
+
+/********************************
+ FORM ELEMENTS
+*********************************/
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+}
+
+input, select {
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/********************************
+ LISTS
+*********************************/
+ul {
+    margin-top: 10px;
+}
+
+li {
+    margin: 6px 0;
+}
+
+/********************************
+ HABIT STREAK
+*********************************/
+#habitStreak,
+#longestStreak {
+    font-weight: bold;
+    color: #ff6600;
+}
+
+/********************************
+ SUMMARY
+*********************************/
+.summary-grid {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.insight {
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+}
+
+/********************************
+ CHARTS
+*********************************/
+canvas {
+    max-width: 100%;
+    margin: 20px auto;
+}
+
+/********************************
+ EXPENSE TRACKER
+*********************************/
+#expenseTotalToday {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #28a745;
+}
+
+#expenseList li {
+    padding: 8px 10px;
+    background: #f1f3f5;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/********************************
+ FLOATING BOTTOM NAV (PRO UI)
+*********************************/
+.bottom-nav {
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    width: 90%;
+    max-width: 420px;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.bottom-nav button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bottom-nav button:hover {
+    color: #007bff;
+}
+
+.bottom-nav button.active {
+    color: #007bff;
+}
+
+/********************************
+ MOBILE RESPONSIVE
+*********************************/
+@media (max-width: 600px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .summary-grid {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/********************************
+ DARK MODE
+*********************************/
+body.dark {
+    background: #121212;
+    color: #eee;
+}
+
+body.dark .header,
+body.dark .card,
+body.dark .module,
+body.dark .bottom-nav {
+    background: #1e1e1e;
+    color: #eee;
+}
+
+body.dark button {
+    background: #333;
+}
+
+body.dark .card:hover {
+    background: #007bff;
+}
+
+body.dark .bottom-nav button {
+    color: #aaa;
+}
+
+body.dark .bottom-nav button.active {
+    color: #4da3ff;
+}
+
+body.dark #expenseList li {
+    background: #2a2a2a;
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.switch {
+    position: relative;
+    width: 46px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    background: #ccc;
+    border-radius: 24px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.3s;
+}
+
+.slider::before {
+    content: "";
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background: #2563eb;
+}
+
+input:checked + .slider::before {
+    transform: translateX(22px);
+}
+
+/********************************
+ PAGE ANIMATIONS
+*********************************/
+.page {
+    animation: fadeSlide 0.35s ease;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.calendar-cell {
+    background: #f1f3f5;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    text-align: center;
+}
+
+.calendar-cell strong {
+    display: block;
+    font-size: 14px;
+}
+
+body.dark .calendar-cell {
+    background: #2a2a2a;
+}
+/* ===============================
+   HISTORY – MODERN CARD UI
+================================ */
+
+#historyList {
+    list-style: none;
+    padding: 0;
+}
+
+.history-card {
+    background: #f9fafb;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    animation: fadeSlide 0.3s ease;
+}
+
+.history-date {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #2563eb;
+}
+
+.history-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #e5e7eb;
+}
+
+/* Color coding */
+.chip.habit { background: #fff7ed; color: #c2410c; }
+.chip.study { background: #ecfeff; color: #0369a1; }
+.chip.expense { background: #fef2f2; color: #b91c1c; }
+
+/* Mood colors */
+.chip.mood.happy { background: #ecfdf5; color: #047857; }
+.chip.mood.sad { background: #eef2ff; color: #4338ca; }
+.chip.mood.neutral { background: #f3f4f6; color: #374151; }
+.chip.mood.stressed { background: #fff1f2; color: #be123c; }
+
+/* Dark mode */
+body.dark .history-card {
+    background: #1f2933;
+}
+
+body.dark .chip {
+    background: #374151;
+    color: #e5e7eb;
+}
+
+body.dark .history-date {
+    color: #60a5fa;
+}
+.history-card.great {
+    border-left: 4px solid #22c55e;
+}
+
+.history-card.warning {
+    border-left: 4px solid #ef4444;
+}
+#habitList li {
+    list-style: none;
+    padding: 8px;
+    margin: 6px 0;
+    background: var(--card-bg);
+    border-radius: 8px;
+}
+
+.habit-done {
+    opacity: 0.6;
+    text-decoration: line-through;
+}
+/* ===============================
+   MOBILE RESPONSIVE FIXES
+   =============================== */
+@media (max-width: 600px) {
+
+  /* Overall page padding (fix bottom nav overlap) */
+  .page {
+    padding: 12px;
+    padding-bottom: 100px; /* important */
+  }
+
+  /* Header text scaling */
+  h1, h2 {
+    font-size: 1.1rem;
+  }
+
+  /* Tabs (Mood / Habits / Study / Expense) */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .tab {
+    flex: 0 0 auto;
+    min-width: 120px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  /* Summary section stacks vertically */
+  .summary {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .summary-item {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* Analytics dashboard spacing */
+  .analytics {
+    gap: 20px;
+  }
+
+  /* CHART CONTAINERS */
+  .chart-card {
+    width: 100%;
+    padding: 12px;
+  }
+
+  /* Chart canvas fix */
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 260px;
+  }
+
+  /* Habit list spacing */
+  #habitList li,
+  #studyList li,
+  #expenseList li {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  /* Calendar grid → single column */
+  #calendarGrid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 8px;
+  }
+
+  .calendar-cell {
+    font-size: 0.85rem;
+  }
+
+  /* Bottom navigation */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    background: var(--card-bg);
+    z-index: 999;
+  }
+
+  .bottom-nav button {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 768px) {
+  canvas {
+    max-height: 260px;
+  }
+}
+@media (max-width: 768px) {
+  .day-box span {
+    margin: 0 3px;
+    font-size: 11px;
+  }
+}
+@media (max-width: 600px) {
+  .today-summary {
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+  }
+}
+@media (max-width: 600px) {
+  header {
+    padding: 12px;
+  }
+}
+/* 🌿 Professional Green Background */
+body {
+  background:
+    radial-gradient(circle at top left, rgba(34,197,94,0.12), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(34,197,94,0.08), transparent 45%),
+    #0b0f0d;
+}
+/* 🌿 Light Green Cards */
+.card,
+.summary-card,
+.analytics-card,
+.section,
+.panel {
+  background: rgba(240, 253, 244, 0.95); /* very light green */
+  border: 1px solid rgba(34, 197, 94, 0.15);
+  color: #0f172a;
+}
+
+/* Section headings */
+.card h2,
+.section h2,
+.analytics-card h2 {
+  color: #065f46;
+}
+/* 🌱 Header title fix */
+.app-title,
+header h1 {
+  color: #ecfdf5;            /* soft white */
+  font-weight: 700;
+}
+
+.app-subtitle,
+header p {
+  color: #b7e4d4;            /* muted green */
+}
+.app-title {
+  text-shadow: 0 0 12px rgba(34, 197, 94, 0.35);
+}
+/* ============================= */
+/* 🌱 GREEN CARD CONTAINERS */
+/* ============================= */
+
+.module,
+.dashboard,
+.summary,
+.analytics,
+.monthly-overview,
+.card {
+  background: rgba(236, 253, 245, 0.85); /* light green */
+  backdrop-filter: blur(6px);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.12);
+  color: #064e3b;
+}
+.module h2 {
+  color: #065f46;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+canvas {
+  background: rgba(236, 253, 245, 0.6);
+  border-radius: 14px;
+  padding: 10px;
+}
+.calendar-grid div {
+  background: rgba(220, 252, 231, 0.9);
+  border-radius: 12px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  color: #064e3b;
+}
+body.dark .module,
+body.dark .card {
+  background: rgba(6, 78, 59, 0.55);
+  color: #ecfdf5;
+  border-color: rgba(34, 197, 94, 0.35);
+}

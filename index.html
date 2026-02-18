@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Life Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<header class="header">
+    <h1>🌱 Life Dashboard</h1>
+    <p>Track your life, one day at a time</p>
+    <div class="theme-toggle">
+    <span>🌞</span>
+    <label class="switch">
+        <input type="checkbox" id="darkToggle" onchange="toggleTheme()">
+        <span class="slider"></span>
+    </label>
+    <span>🌙</span>
+</div>
+
+</header>
+
+<!-- ================= HOME PAGE ================= -->
+<section id="home" class="page">
+
+    <!-- DASHBOARD CARDS -->
+    <section class="dashboard">
+        <div class="card" onclick="showPage('mood')">😊 Mood</div>
+        <div class="card" onclick="showPage('habit')">🔁 Habits</div>
+        <div class="card" onclick="showPage('study')">📚 Study</div>
+        <div class="card" onclick="showPage('expense')">💰 Expense</div>
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="module">
+        <h2>📊 Today’s Summary</h2>
+
+        <div class="summary-grid">
+            <div id="summaryMood">Mood: —</div>
+            <div id="summaryHabits">Habits: 0</div>
+            <div id="summaryStudy">Study: 0 hrs</div>
+            <div id="summaryExpense">Expense: ₹0</div>
+        </div>
+
+        <p id="summaryInsight" class="insight"></p>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section class="module">
+        <h2>📊 Analytics Dashboard</h2>
+
+        <canvas id="moodChart"></canvas>
+        <canvas id="habitChart"></canvas>
+        <canvas id="studyChart"></canvas>
+        <canvas id="expenseChart"></canvas>
+    </section>
+
+    <!-- MONTHLY CALENDAR OVERVIEW -->
+    <section class="module">
+        <h2>📅 Monthly Overview</h2>
+        <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+
+</section>
+
+<!-- ================= MOOD PAGE ================= -->
+<section id="mood" class="page hidden">
+    <section class="module">
+        <h2>😊 Daily Mood</h2>
+
+        <select id="moodInput">
+            <option value="">Select Mood</option>
+            <option value="Happy">😊 Happy</option>
+            <option value="Neutral">😐 Neutral</option>
+            <option value="Sad">😔 Sad</option>
+            <option value="Stressed">😣 Stressed</option>
+        </select>
+
+        <button onclick="saveMood()">Save Mood</button>
+        <p id="moodResult"></p>
+    </section>
+</section>
+
+<!-- ================= HABIT PAGE ================= -->
+<section id="habit" class="page hidden">
+    <section class="module">
+        <h2>🔁 Habit Tracker</h2>
+
+        <p id="habitStreak">🔥 Streak: 0 days</p>
+        <p id="longestStreak">🏆 Longest Streak: 0 days</p>
+
+        <input type="text" id="habitInput" placeholder="Enter habit">
+        <button onclick="addHabit()">Add Habit</button>
+
+        <ul id="habitList"></ul>
+    </section>
+</section>
+
+<!-- ================= STUDY PAGE ================= -->
+<section id="study" class="page hidden">
+    <section class="module">
+        <h2>📚 Study Tracker</h2>
+
+        <input type="text" id="subjectInput" placeholder="Subject">
+        <input type="number" id="timeInput" placeholder="Hours studied">
+
+        <button onclick="addStudy()">Add Study</button>
+        <ul id="studyList"></ul>
+    </section>
+</section>
+
+
+
+<!-- ================= EXPENSE PAGE ================= -->
+<section id="expense" class="page hidden">
+    <section class="module">
+        <h2>💰 Expense Tracker</h2>
+
+        <input type="number" id="expenseAmount" placeholder="Amount (₹)">
+
+        <select id="expenseCategory">
+            <option value="">Select Category</option>
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Bills</option>
+            <option>Other</option>
+        </select>
+
+        <input type="text" id="expenseNote" placeholder="Note (optional)">
+
+        <button onclick="addExpense()">Add Expense</button>
+
+        <hr>
+
+        <input type="number" id="monthlyLimit" placeholder="Set Monthly Limit (₹)">
+        <button onclick="setMonthlyLimit()">Save Monthly Limit</button>
+
+        <p id="expenseTotalToday">Today: ₹0</p>
+        <p id="expenseMonthTotal">This Month: ₹0</p>
+
+        <ul id="expenseList"></ul>
+    </section>
+</section>
+<!-- ================= HISTORY PAGE ================= -->
+<section id="history" class="page hidden">
+    <section class="module">
+        <h2>📅 Daily History</h2>
+        <ul id="historyList"></ul>
+    </section>
+</section>
+
+<!-- ================= FLOATING NAV ================= -->
+<nav class="bottom-nav">
+    <button onclick="showPage('home')">🏠<br>Home</button>
+    <button onclick="showPage('mood')">😊<br>Mood</button>
+    <button onclick="showPage('habit')">🔁<br>Habits</button>
+    <button onclick="showPage('study')">📚<br>Study</button>
+    <button onclick="showPage('expense')">💰<br>Expense</button>
+    <button onclick="showPage('history')">📅<br>History</button>
+    
+</nav>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
